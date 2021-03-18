@@ -35,6 +35,8 @@ Perspectives:
 'indistingusable angle'
 'normal angle'
 
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/graphics/Folie9.PNG)
+
 
 
 ## Process
@@ -46,6 +48,10 @@ The project conists of the following main parts.
 1. the image library
 2. The training of the model
 3. the android app
+
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/graphics/Folie4.PNG)
+
+
 
 1. Image library. I decided to use my own image libary because of the strict quality input limitations for the training process of the model. Second, this provides full control of what gestures are represented and how the gestures are showen. There is  the possibility to to take the pictures with the same camera which is used for training and ater for recognising recognising. During the process I gained a lot of experience about which of the pictures i took are usefull for the training process. -> see limitations problems. 
 I had to make decicion which approach i want to use: if i want to recognise gestures from every perspective or to recognise from the best angle.
