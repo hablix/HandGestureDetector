@@ -1,8 +1,11 @@
-Name: Hannes Bischoff\
+*Name: Hannes Bischoff\
 Academic year: 2020/2021\
-Course: intelligent Systems
+Course: Intelligent Systems*
 
-# Hand gesture detector on android phone with pre trained TensorFlow Light Model
+# **Hand Gesture Detector on Android phone with pre trained TensorFlow Light Model**
+
+ &nbsp;\
+ &nbsp;
 
 
 # MOTIVATION
