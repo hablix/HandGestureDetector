@@ -8,7 +8,7 @@ assert file(project.ext.ASSET_DIR + "/labels.txt").exists()
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "org.tensorflow.lite.examples.classification"
+        applicationId "xyz.gesturedetector.app"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

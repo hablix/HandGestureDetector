@@ -41,6 +41,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -50,11 +51,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import java.nio.ByteBuffer;
+import java.util.Date;
 import java.util.List;
 import org.tensorflow.lite.examples.classification.env.ImageUtils;
 import org.tensorflow.lite.examples.classification.env.Logger;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Device;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Recognition;
+import java.util.Calendar;
 
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
@@ -86,7 +89,9 @@ public abstract class CameraActivity extends AppCompatActivity
       recognitionValueTextView,
       recognition1ValueTextView,
       recognition2ValueTextView,
-  historyTV;
+  historyTV,
+  nowTV;
+  protected Button buttonReset;
   protected TextView frameValueTextView,
       cropValueTextView,
       cameraResolutionTextView,
@@ -177,6 +182,10 @@ public abstract class CameraActivity extends AppCompatActivity
     recognition2TextView = findViewById(R.id.detected_item2);
     recognition2ValueTextView = findViewById(R.id.detected_item2_value);
     historyTV = findViewById(R.id.TVHistory);
+    nowTV = findViewById(R.id.TVNow);
+    buttonReset = findViewById(R.id.buttonReset);
+    buttonReset.setOnClickListener(this);
+
 
     frameValueTextView = findViewById(R.id.frame_info);
     cropValueTextView = findViewById(R.id.crop_info);
@@ -516,21 +525,36 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   String vorherigesSymbol = "";
+  String vorherigesSymbolTime = "";
+
+  long currentTime;
   void SetSymbol(List<Recognition> results)
   {
+    // if confident enough
     if(results.get(0).getConfidence() - 0.10 > results.get(1).getConfidence()) {
 
+      //If new symbol, reset time
       if (vorherigesSymbol != results.get(0).getTitle()) {
-
-        String s = historyTV.getText().toString().split(":")[1];
-        if(s.length()>12)
-        {  s = s.substring(10);}
-        String s2 = "History: " + GetEmoji(results.get(0).getTitle()) + s;
-        historyTV.setText(s2);
+        currentTime = System.currentTimeMillis();
+      }
+      //If new symbol, and time has passed more than 500ms; set history
+      if (vorherigesSymbolTime != results.get(0).getTitle()) {
+        if(currentTime +700 <  System.currentTimeMillis()) {
+          String s = historyTV.getText().toString().split(":")[1];
+          if (s.length() > 30) {
+            s = s.substring(28);
+          }
+          String s2 = "History: " + GetEmoji(results.get(0).getTitle()) + s;
+          historyTV.setText(s2);
+          vorherigesSymbolTime = results.get(0).getTitle();
+        }
       }
 
       vorherigesSymbol = results.get(0).getTitle();
+
     }
+    // always update curent emoji
+    nowTV.setText(GetEmoji(results.get(0).getTitle()));
   }
 
   private String GetEmoji(String in)
@@ -560,7 +584,7 @@ public abstract class CameraActivity extends AppCompatActivity
         if (recognition.getTitle() != null) recognitionTextView.setText(recognition.getTitle());
         if (recognition.getConfidence() != null)
           recognitionValueTextView.setText(
-              String.format("%.2f", (100 * recognition.getConfidence())) + "%");
+              String.format("%.0f", (100 * recognition.getConfidence())) + "%");
       }
 
       Recognition recognition1 = results.get(1);
@@ -568,7 +592,7 @@ public abstract class CameraActivity extends AppCompatActivity
         if (recognition1.getTitle() != null) recognition1TextView.setText(recognition1.getTitle());
         if (recognition1.getConfidence() != null)
           recognition1ValueTextView.setText(
-              String.format("%.2f", (100 * recognition1.getConfidence())) + "%");
+              String.format("%.0f", (100 * recognition1.getConfidence())) + "%");
       }
 
       Recognition recognition2 = results.get(2);
@@ -576,7 +600,7 @@ public abstract class CameraActivity extends AppCompatActivity
         if (recognition2.getTitle() != null) recognition2TextView.setText(recognition2.getTitle());
         if (recognition2.getConfidence() != null)
           recognition2ValueTextView.setText(
-              String.format("%.2f", (100 * recognition2.getConfidence())) + "%");
+              String.format("%.0f", (100 * recognition2.getConfidence())) + "%");
       }
 
       SetSymbol(results);
@@ -657,7 +681,10 @@ public abstract class CameraActivity extends AppCompatActivity
       }
       setNumThreads(--numThreads);
       threadsTextView.setText(String.valueOf(numThreads));
+    } else if (v.getId() ==R.id.buttonReset) {
+      historyTV.setText("History: ");
     }
+
   }
 
   @Override

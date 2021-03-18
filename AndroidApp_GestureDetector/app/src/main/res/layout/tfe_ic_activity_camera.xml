@@ -26,22 +26,42 @@ android:background="#00000000">
     android:orientation="vertical">
 
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
-        tools:context="org.tensorflow.lite.examples.classification.CameraActivity" />
+        tools:context="org.tensorflow.lite.examples.classification.CameraActivity" >
+    </FrameLayout>
 
     <TextView
         android:id="@+id/TVHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="80dp"
+        android:lines="1"
         android:text="History: "
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        />
+
+    <TextView
+        android:id="@+id/TVNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="130dp"
+        android:text="emoji"
+        android:textSize="55sp" />
+
+    <Button
+        android:id="@+id/buttonReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset History"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="480dp"
+        />
 
 
     <androidx.appcompat.widget.Toolbar
