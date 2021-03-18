@@ -1,5 +1,5 @@
-Name: Hannes Bischoff
-Academic year: 2020/2021
+Name: Hannes Bischoff\
+Academic year: 2020/2021\
 Course: intelligent Systems
 
 # Hand gesture detector on android phone with pre trained TensorFlow Light Model
@@ -129,13 +129,13 @@ To decide the quality of the created model I used different methods.
 
 * The loss and accuracy values of the model.evaluate() method. The lower the loss value and the higher the accuracy value the better the modell is. This gives a quantitative overview.
 
-![image](https://raw.githubusercontent.com/hablix/HandGestureDetector/main/.graphics/Folie13.PNG)
+![image](https://raw.githubusercontent.com/hablix/HandGestureDetector/main/.graphics/Folie14.PNG)
 
 
 * For a qualitative impression i plotted a map of 100 random images with the predicted label and the real label. This made it visible in which actual cases the prediction is not working. Are these fails ambiguous images, where the perspective does not allow any distinction or are there other reasons? This evaluation had huge impact of how i decided to take the next pictures for the dataset.
 
 
-![image](https://raw.githubusercontent.com/hablix/HandGestureDetector/main/.graphics/Folie14.PNG)
+![image](https://raw.githubusercontent.com/hablix/HandGestureDetector/main/.graphics/Folie15.PNG)
 
 * Test on the device. After including the TF lite model on the phone the final tests under real circumstances can done. I tested the recognision capabilities under different backgrounds lightning and perspetives. The results were changing a lot and sometimes contradictios to the quantitative and qualitative evaluation. But with large enough datasets and the gaind knowledge this issues could be sloved.
 
@@ -152,7 +152,7 @@ I extended the app with an History feature which showes the last recognised gest
 
 I did several experiments with the different models under 'real' circumstences. I decidet to include the model in the apps data so model is always avaliable, not depending on network connection.
 
-![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie12.PNG)
+![image](https://raw.githubusercontent.com/hablix/HandGestureDetector/main/.graphics/Folie12.PNG)
 
 # CONCLUSION
 
@@ -188,23 +188,6 @@ Example TF light model trained with Hands:\
 Jupyter notebook of Model maker:\
 [modelCreator04](https://github.com/hablix/HandGestureDetector/blob/main/modelCreator04.ipynb)
 
-
-
-
-
-# RESULTS and LIMITATIONS
-* adding a no gesture is showen class
-* some letters are only working with movement -> not able to detect with continuesly but static picture classifyer
-* limited to the gesture alphabet, sign language is more about actions words and needs a whole body movement detector, this is not part of this project.
-
-* ambiguity of some hand gestures from some angles.
-* recognising hand gestures from different angles is compliated-> from some perspective they look the same (thumb up, letter y)
-* deciding if image classyfier should work with hand gestures from all perspectives OR from the 'best angle'
-* limited to the left hand.
-* only from best angle
-* different backgrounds can cause problems
-
-# Rsuts
 
 
 # SOURCES
