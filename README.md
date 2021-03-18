@@ -1,6 +1,6 @@
-# project: Hand gesture detector on android phone with pre trained TensorFlow Light Model.
+# Hand gesture detector on android phone with pre trained TensorFlow Light Model.
 
-a lazy project report. missing abstract and discusson...
+a project at University
 
 
 ## Motivation
@@ -35,7 +35,7 @@ Perspectives:
 'indistingusable angle'
 'normal angle'
 
-![iamge](https://github.com/hablix/HandGestureDetector/blob/main/graphics/Folie9.PNG)
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie9.PNG)
 
 
 
@@ -49,7 +49,7 @@ The project conists of the following main parts.
 2. The training of the model
 3. the android app
 
-![iamge](https://github.com/hablix/HandGestureDetector/blob/main/graphics/Folie4.PNG)
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie4.PNG)
 
 
 
