@@ -1,25 +1,27 @@
+Name: Hannes Bischoff
+Academic year: 2020/2021
+Course: intelligent Systems
+
 # Hand gesture detector on android phone with pre trained TensorFlow Light Model.
 
-a project at University
+a project at University of Rijeka
 
 
-## Motivation
-The original idea behind this project was to develop and android app which uses the camera to detect different hand gesures. This could help people who dont understand the finger or hand alphabet to 'read' or understand the what a person shows in sign language. This is a very complicated and complex process. I was thinking about how to reduce complexity to create a arcvievable and realistic project for intelligent systems course. This project should more or less be a proof of conecpt hat it is possible to detect different hand gestures on an android phone by using the convolutional neuronal network and with a pre trained TensorFlow Light Model for image classifying. Furthermore it will highlight the limitations and challenges i experienced in this process.
 
 
-# ABSTRACT
 
-# SOURCES
-
-
-## technology
-
-the artifical intelligence part will be coverd by the convolutional neuronal network. I decided to use TensorFlow becaus it was used in the exercises during the semester so i already used it and had experience in it and because the light version of TensorFlow models could be run in an android app, which makes it perfect for mobile use in the described use case.
-
-Especally for the the transfer learning for timage classification i used TensorFlow Lite model maker library with Keras ub layer as base of the model.
+## MOTIVATION
+The original idea behind this project was to develop and android app which uses the camera to detect different hand gesures. This could assist people who dont understand the finger or hand alphabet to 'read' or understand the what a person shows in sign language. This is a very complicated and complex process. I was thinking about how to reduce complexity to create a arcvievable and realistic project for intelligent systems course. This project should more or less be a proof of conecpt that it is possible to detect different hand gestures on an android phone by using the convolutional neuronal network (cnn) with a pre trained TensorFlow Light Model for image classifying. Furthermore this small report will highlight the limitations and challenges i experienced in this process.
 
 
-# clarification of terms
+# TECHNOLOGY
+
+The artifical intelligence part will be coverd by the convolutional neuronal network. I decided to use TensorFlow becaus it was used in the exercises during the semester so i already used it and had experience in it and because the light version of TensorFlow models could be run in an android app, which makes it perfect for mobile use in the described use case.
+
+Especally for the the transfer learning for image classification i used TensorFlow Lite model maker library with Keras ub layer as base of the model.
+
+
+# GLOSSARY
 TensorFlow
 Is an open source library from google for deep learning. which can be used for training of neuronal networks and is implemented in python and c++;
 
@@ -29,38 +31,47 @@ Version of Tensorflow especally designed for moblie devices. It can be used to e
 TensorFlow (Light) model
 Model is a cluster of Tensors and layers wich processed data in the way it was trained for. Light version of this is cn be run on android app.
 
+Hand gestures. The 'german' hand alphabet knows 31 'letters'. From there, 5 signals are represented with a motion component, but this image classifier can only detect static pictures so there would not be  possible to detect all letters. 
 
-Perspectives:
-'best angle'
-'indistingusable angle'
-'normal angle'
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie10.PNG)
+
+
+To reduce the compleety i decidet to train the model with 5 hand gestures which are easy to recognise. (thmub up, fist, palm, letter y, letter f)
+
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie11.PNG)
+
+
+
+Perspectives from which the hand gesture can be viewd. I definded 3 categorys which i refer to.
+* 'best angle'
+* 'non perfect angle'
+* 'indistingusable angle'
+
 
 ![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie9.PNG)
 
 
-
-## Process
-
-## Project
+## PROJECT
 
 The project conists of the following main parts.
 
-1. the image library
-2. The training of the model
-3. the android app
+1. Image library (Data set)
+2. Training of the model (Model maker)
+3. Android app (App Gesture Detector)
 
 ![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie4.PNG)
 
 
 
-1. Image library. I decided to use my own image libary because of the strict quality input limitations for the training process of the model. Second, this provides full control of what gestures are represented and how the gestures are showen. There is  the possibility to to take the pictures with the same camera which is used for training and ater for recognising recognising. During the process I gained a lot of experience about which of the pictures i took are usefull for the training process. -> see limitations problems. 
+## 1. Image library (Dataset)
+I decided to use my own image libary because of the strict quality input limitations for the training process of the model. Second, this provides full control of what gestures are represented and how the gestures are showen. This offers the posibility to take the pictures with the same camera which is used for training and afterwards for recognising. During the process I gained a lot of experience about which pictures are usefull for the training process. -> see limitations problems. 
 I had to make decicion which approach i want to use: if i want to recognise gestures from every perspective or to recognise from the best angle.
 
-Every perspective needs a lot of data. In the experiment i used ~150 pictures for each gesture from multiple angles. This did not lead to an useful model. and it resulted in disaster - > regognision on the phone was as low as 10% even for showing the gesture in 'best angle' the reason for this was there are multiple images in the training process where it is impossible to distinguish betwen the gestures (thumb up, letter y). I assume this problem could be fixed by using a very much larger data set. This works in different models and different sources state that this is not a myor problem for AIs. But due to my limitations in efforts and unsecure outcome i decidet to train the model with images from best angle perspective.
+Every perspective needs a lot of data. In the experiment i used ~150 pictures for each gesture from multiple angles. This did not lead to an useful model. and it resulted in disaster - > regognision on the phone was as low as 10% even for showing the gesture in 'best angle' the reason for this was there are multiple images in the training process where it is impossible to distinguish betwen the gestures (thumb up, letter y). I assume this problem could be fixed by using a very much larger data set. This works in different models and different sources state that this is not a mayor problem for AIs. But due to my limitations in efforts and unsecure outcome i decided to train the model with images from best angle perspective.
 
- The second mayor issue it sthe background. Humans can be taught easily wht the object is by presenting it on a plene background. And the person will regognise this object on any background, beause it knows the background does not matter. The imag clasifier on the other hand does not get any further 'explination' so it learns and trains itself by finding the similaitieies between the images. The images which have some consistent parts will be classified as one class, and so represent the same showen object. So it does not distinguist between background and object and therefore it can not ignore the background. This lead to very low sucess rate afer the first experiment on the phone. The data set contained pictures with more or less the same background. In the experiemnt the background didnt matched the one from thr training images at all and results were very low. So the best way to train the model is indeed by changing the background as much as possible. So the consistent part in the images becomes the object which will be the decisive part and background is insignificant.
+The second mayor issue it the background. Humans can be taught easily wht the object is by presenting it on a plene background. And the person will regognise this object on any background, beause it knows the background does not matter. The imag clasifier on the other hand does not get any further 'explination' so it learns and trains itself by finding the similaitieies between the images. The images which have some consistent parts will be classified as one class, and so represent the same showen object. So it does not distinguist between background and object and therefore it can not ignore the background. This lead to very low sucess rate afer the first experiment on the phone. The data set contained pictures with more or less the same background. In the experiemnt the background did not matched the one from the training images at all and results were very low. So the best way to train the model is indeed by changing the background as much as possible. So the consistent part in the images becomes the object which will be the decisive part and background is insignificant.
 
- With this knowledge i took pictures with of handgestures with different backgrounds, but still the same background for each gesture. Reason behind this is, if for example one gesute is always represented with a darker background as an other. A picture may not only be classied by the object but also by the brightness of the background. For sufficient large data sets > 2000 pictures this becomes unimportand but the effoert to take this much amount of pictures i considerd as not applicable. So in the end the data set consisted od ~200 pictures for each gesture.
+With this knowledge i took pictures with of handgestures with different backgrounds from best angle and non perfect angle. But i removed pictures from indistinguisable angle from the dataset. this proved to lead to the best results. in the end i generated more than 210 pictures for each gesture.
 
 Anothe huge improvement in recognision was data argumentation befor feeding this into the model. Rotation, zoom and brightnes adjustment helped a lot.
 
@@ -71,7 +82,9 @@ During the whole project the image library was changed and improved all the time
 
 
 
-2. Training of the model.
+## 2. Training of the model (Model maker)
+
+### Training
 
 For training the model I used Google Colaboratory. This so called web IDE for Python enabels to run python code or jupiter notebooks without setting things up on local computer. It provides acess to Googles Computing power and GPUs for faster execution in building the model. The advantages are, there is no need to install all the project related libraries on local computer. During the developping there is no danger from executing and debugging unknowen code from different sources on the internet. Faster execution in building the model. But it also made it necessary to store the dataset in Google drive for easier access. So I reduced the images resolution to 180px x 180px. 
 
@@ -104,14 +117,11 @@ number of samples which is used in a training step.
 * Data argumentation(https://github.com/tensorflow/examples/blob/83a8b6edfa03fca856b8817c29a06c9d93d4f34b/tensorflow_examples/lite/model_maker/core/task/image_preprocessing.py#L186)
 input images are modified a bit to represent a larger vayrity of images. This consists of croping the image, rezising the image and flipping the image. 
 
-*
 
 
-(overfitting) 
-
+### Evaluation
 
 After creating and training the model, the model can be evaluated and if satisfying saved as a TF lite model. This TF light model can then be integrated in the android app.
-
 
 
 To decide the quality of the created model I used different methods.
@@ -124,15 +134,11 @@ To decide the quality of the created model I used different methods.
 
 There was a constand feedback loop between taking pictures for dataset, modifying pictures, customising the model and evaluating the new model. I repeated this with different experiments and settings multiple times. The gained knowledge I used to improve the settings and circumstances but it also lead me to define certain limitations. see leimitations.
 
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie13.PNG)
 
 
 
-
-
-
-
-
-3. Android app
+## 3. Android app (App Gesture Detector)
 
 Konstantly updated with the newly built model.
 
@@ -141,8 +147,12 @@ First i wanted to create an java android app from scratch, which i have done ear
 
 
 
+![iamge](https://github.com/hablix/HandGestureDetector/blob/main/.graphics/Folie12.PNG)
 
-## problems / limitations
+
+
+
+# RESULTS and LIMITATIONS
 * adding a no gesture is showen class
 * some letters are only working with movement -> not able to detect with continuesly but static picture classifyer
 * limited to the gesture alphabet, sign language is more about actions words and needs a whole body movement detector, this is not part of this project.
@@ -157,7 +167,7 @@ First i wanted to create an java android app from scratch, which i have done ear
 # Rsuts
 
 
-# Sources
+# SORCES
 
 https://hoerbehindert.ch/information/kommunikation/fingeralphabet
 
@@ -165,21 +175,4 @@ https://www.tensorflow.org/lite/tutorials/model_maker_image_classification
 
 https://www.tensorflow.org/
 
-
-
-
-
-
-
-
-22/22 [==============================] - 125s 6s/step - loss: 1.7141 - accuracy: 0.2243 - val_loss: 1.3732 - val_accuracy: 0.3906
-Epoch 2/5
-22/22 [==============================] - 36s 2s/step - loss: 1.2582 - accuracy: 0.5415 - val_loss: 1.0671 - val_accuracy: 0.7344
-Epoch 3/5
-22/22 [==============================] - 36s 2s/step - loss: 1.0328 - accuracy: 0.7055 - val_loss: 0.9358 - val_accuracy: 0.7812
-Epoch 4/5
-22/22 [==============================] - 36s 2s/step - loss: 0.8999 - accuracy: 0.8101 - val_loss: 0.8638 - val_accuracy: 0.8281
-Epoch 5/5
-22/22 [==============================] - 36s 2s/step - loss: 0.8531 - accuracy: 0.8117 - val_loss: 0.8141 - val_accuracy: 0.8594
-
-step - loss: 1.7141 - accuracy: 0.2243 - val_loss: 1.3732 - val_accuracy: 0.3906 Epoch 2
+https://github.com/tensorflow/examples/blob/83a8b6edfa03fca856b8817c29a06c9d93d4f34b/tensorflow_examples/lite/model_maker
